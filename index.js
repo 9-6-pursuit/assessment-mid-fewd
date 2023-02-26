@@ -36,7 +36,7 @@ function getAllMovieTitles (movies)
   {
   throw "Empty array"
   }
-  return movies.map(movie => movie.title) 
+  return movies.map(movie => movie.title);
 
 }
 
@@ -61,10 +61,10 @@ function getAllMovieTitles (movies)
 function checkIfAnyMovieHasRating(movies,rating = "G") 
 {
   if(!movies.length)
-{
+  {
   throw "Empty array"
-}
-return movies.some(movie => movie.rated === rating)
+  }
+  return movies.some(movie => movie.rated === rating);
 }
 
 /**
@@ -90,7 +90,6 @@ function findById(movies, id)
     throw "Empty array"
   }
   let result = movies.find(movie => movie.imdbID === id);
-
   return result ? result : null;
 }
 
@@ -118,10 +117,10 @@ function findById(movies, id)
  */
 function filterByGenre(movies, genre) 
 {
-  if(!movies.length){
-    throw "Empty array";
+  if(!movies.length)
+  {
+  throw "Empty array";
   }
-
   return movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase()));
 }
 
@@ -151,14 +150,18 @@ function filterByGenre(movies, genre)
  */
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) 
 {
-  if(!movies.length){
-    throw "Empty array";
+  if(!movies.length)
+  {
+  throw "Empty array";
   }
 
-  return movies.filter(movie => {
-    let releasedYear = movie.released.split(" ")[2];
-    return releasedYear <= year;
-  });
+  //Clean Code as one line
+   return movies.filter(movie => movie.released.split(" ")[2] <= year);
+
+   // return movies.filter(movie => {
+  //   let releasedYear = movie.released.split(" ")[2];
+  //   return releasedYear <= year;
+  // });
 }
 
 /**
@@ -179,10 +182,10 @@ function checkMinMetascores(movies, metascore)
 {
   if(!movies.length)
   {
-    throw "Empty array";
+  throw "Empty array";
   }
 
-return movies.every(movie => movie.metascore >= metascore);
+  return movies.every(movie => movie.metascore >= metascore);
 }
 
 /**
@@ -211,14 +214,14 @@ return movies.every(movie => movie.metascore >= metascore);
  */
 function getRottenTomatoesScoreByMovie(movies) 
 {
-    if(!movies.length)
+  if(!movies.length)
   {
-    throw "Empty array";
+  throw "Empty array";
   }
 
   return movies.map(movie => {
-    let rate = movie.ratings.find(rating => rating.source == "Rotten Tomatoes").value;
-    return {[movie.title]: rate};
+  let rate = movie.ratings.find(rating => rating.source == "Rotten Tomatoes").value;
+  return {[movie.title]: rate};
   });
 }
 
