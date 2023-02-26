@@ -30,7 +30,15 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if (!movies.length) {
+    throw "No movies in array";
+  }
+  const movieTitles = movies.map((element) => {
+    return element.title;
+  });
+  return movieTitles;
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +58,16 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating = "G") {
+  if (!movies.length) {
+    throw "No movies in array";
+  }
+  const ratedMovies = movies.some((element) => {
+    return element.rated === rating;
+  });
+
+  return ratedMovies;
+}
 
 /**
  * findById()
@@ -68,7 +85,17 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if (!movies.length) {
+    throw "No movies in array";
+  }
+  const idMovie = movies.find((element) => element.imdbID === id);
+  if (idMovie) {
+    return idMovie;
+  } else {
+    return null;
+  }
+}
 
 /**
  * filterByGenre()
@@ -92,7 +119,15 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  if (!movies.length) {
+    throw "No movies in array";
+  }
+  const genreMovies = movies.filter((movie) =>
+    movie.genre.toLowerCase().includes(genre.toLowerCase())
+  );
+  return genreMovies;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +153,23 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  // guard clause
+  if (!movies.length) {
+    throw "No movies in array";
+  }
+  // filtering movies for year
+  const releasedMovies = movies.filter((movie) => {
+    // split 'released' date string in movie object into an array of strings
+    const movieReleaseDate = movie.released.split(" ");
+    // the year is the third element in that array, compare it to given year
+    if (movieReleaseDate[2] <= year) {
+      // if movie passes test, add it to new array
+      return movie;
+    }
+  });
+  return releasedMovies;
+}
 
 /**
  * checkMinMetascores()
@@ -134,7 +185,12 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  if (!movies.length) {
+    throw "No movies in array";
+  }
+  return movies.every((movie) => movie.metascore >= metascore);
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
