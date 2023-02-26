@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -30,7 +31,19 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  let movieTitle = [];
+
+  if (movies.length === 0) {
+  throw "The movie array is empty";
+  } else {
+    movieTitle = movies.map((movie) => {
+      return movie.title;
+    })
+  }
+  return movieTitle;
+}
+
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +63,14 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating = "G") {
+  if (movies.length === 0) {
+      throw "The movie array is empty"; 
+      } else { 
+       return movieRating = movies.some(movie => movie.rated === rating
+      );
+    }
+}
 
 /**
  * findById()
@@ -68,8 +88,19 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if (movies.length === 0) {
+    throw "The movie array is empty";
+  } 
 
+ let movieId = movies.find(movie => movie.imdbID === id);
+
+  if(movieId) {
+    return movieId;
+  } else {
+    return null;
+  }
+}
 /**
  * filterByGenre()
  * -----------------------------
@@ -92,7 +123,18 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  if (movies.length === 0) {
+    throw "The movie array is empty"; 
+  } 
+  return movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase()));
+}
+/* for time purposes use includes() because your ass is slow as hell; after exam practice using the split method with John for office hours
+
+- using includes because the movie.genre is a string and not an array; I can also split(',') to convert into an array and loop through the array but too much work and time - though, it would be a nice challenge.
+*/
+
+
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +160,14 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  if (movies.length === 0) {
+    throw "The movie array is empty";
+  } 
+  return movies.filter(movie => movie.released.match(/\d{4}/)[0] <= year);
+}
+//I love me some regEx - regEx saved me on this one because I know no other way, hahaha! Take that, STRING!
+
 
 /**
  * checkMinMetascores()
@@ -134,7 +183,12 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  if (movies.length === 0) {
+    throw "The movie array is empty";
+  }
+  return movies.every(movie => Number(movie.metascore) >= metascore);
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -160,7 +214,30 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if (movies.length === 0) {
+    throw "The movie array is empty"; 
+  }
+  return movies.map((movie) => {
+    let metascore = movie.ratings.find(rating => rating.source.toLowerCase() == "rotten tomatoes")
+    return {[movie.title]: metascore.value};
+  });
+}
+/* this one was a bit tricky, but I finally figured out the order since it wants to be complicated and use the find() method (very unnecessary -_-)
+
+1. I put the map() method first since I want to return a whole new copy of the movies array
+
+2. then I wanted to find the movie's metascore rating, ratings is another array withing the movies array; therefore we have to write it out as: 
+    movie.ratings.find()
+    *** note there is an 's' at the end of ratings because we are looping into the ratings array itself (it is not an iterator like rating, which comes next). 
+
+3. now that we have movie.ratings.find() we set the conditions for our function as so: if rating.source.toLowerCase() == "rotten tomatoes" find it and put it into an array. we are telling our fxn to find the source that is a metascore because there are more than 1 rating sources in our ratings [w/ an s] array. I set this fxn to the name metascore
+
+I put toLowerCase() to prevent case-sensitivity errors in real life like: RotTen TomaToes; sometimes people make mistakes, hahaha. 
+
+4. finally, I returned a new obj using the string literal syntax for objects. I put the .value at the end of our variable metascore(which is a higher order fxn) to return the value of the metascore rating in our new obj. YAYYYY! I done whooohoooh!
+*/
+
 
 // Do not change anything below this line.
 module.exports = {
