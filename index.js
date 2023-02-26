@@ -30,7 +30,13 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if (movies.length === 0) {
+    throw "Error" 
+  } //error throw is movies array is empty.
+  return movies.map(({title}) => title)
+  //Map iterates through the movies array, returning each title.
+}
 
 /**
  * checkIfAnyMovieHasRating()
@@ -50,7 +56,14 @@ function getAllMovieTitles() {}
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating() {}
+function checkIfAnyMovieHasRating(movies, rating = "G") {
+  if (movies. length === 0) {
+    throw "Error."
+  } //A movie rating. Defaults to "G".
+    //If the inputted `movies` array is empty, throw an error with a message.
+  return movies.some(({rated}) => rating === rated ? true : false)
+  //Some iterates through the movie array, returning the movies that have ratings that match the parameters.
+}
 
 /**
  * findById()
@@ -68,7 +81,15 @@ function checkIfAnyMovieHasRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if (movies.length === 0) {
+    throw "Error."
+  } //If the inputted `movies` array is empty, throw an error with a message.
+  return movies.find(movie => {
+    return movie.imdbID === id
+  }) || null
+  //Returns a movie object from an array of objects based on the ID. If the ID does not match any movie, return `null`.
+}
 
 /**
  * filterByGenre()
@@ -92,7 +113,13 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  if (movies.length === 0) {
+    throw "Error."
+  } //If the inputted `movies` array is empty, throw an error with a message.
+  return movies.filter(movie => movie.genre.toLowerCase().includes(genre.toLowerCase()))
+  // Use filter to see if the genre of a movie is included in the movie genre and returns all movie objects with a matching genre. Case-insensitive.
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -118,7 +145,14 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  if (movies.length === 0) {
+    throw "Error."
+  } //If the inputted `movies` array is empty, throw an error with a message.
+  return movies.filter(movie => Number(movie.released.slice(-4)) <= year)
+  //Returns all movie objects with a `released` year equal to or less than the given year.
+  //Use number to convert the string into a number and then slice 4 from the movie string to return the year released.
+}
 
 /**
  * checkMinMetascores()
@@ -134,7 +168,14 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  checkMinMetascores(movies, 90));
  *  //>  false
  */
-function checkMinMetascores() {}
+function checkMinMetascores(movies, metascore) {
+  if (movies.length === 0) {
+    throw "Error."
+  } //If the inputted `movies` array is empty, throw an error with a message.
+  return movies.every(movie => movie.metascore >= metascore)
+  // Checks the metascore for every movie to see if it is greater than the metascore parameter. 
+  // Returns either true or false depending whether all movies have a minimum metascore. 
+}
 
 /**
  * getRottenTomatoesScoreByMovie()
@@ -160,7 +201,16 @@ function checkMinMetascores() {}
       { "James and the Giant Peach": "91%" },
     ];
  */
-function getRottenTomatoesScoreByMovie() {}
+function getRottenTomatoesScoreByMovie(movies) {
+  if (movies.length === 0) {
+    throw "Error."
+  } //If the inputted `movies` array is empty, throw an error with a message.
+  return movies.map(movie => {
+    let rtScore = movie.ratings.find((rating) => rating.source === 'Rotten Tomatoes')
+    return { [movie.title]: rtScore.value }
+  })  // Use map to iterate through the movies array.
+      // Transform each movie, returning an array of objects where the key is the title of the movie and the value is the score received from Rotten Tomatoes.
+}
 
 // Do not change anything below this line.
 module.exports = {
