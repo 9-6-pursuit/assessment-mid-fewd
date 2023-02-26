@@ -117,9 +117,9 @@ function filterByGenre(movies, genre) {
     throw "There are no movies.";
   }
 
-  const genreLowerCase = genre.toLowerCase();
-  const filteredMovies = movies.filter((movie) => {
-    const genres = movie.genre.toLowerCase().split(", ");
+  let genreLowerCase = genre.toLowerCase();
+  let filteredMovies = movies.filter((movie) => {
+    let genres = movie.genre.toLowerCase().split(", ");
     return genres.includes(genreLowerCase);
   });
 
@@ -213,7 +213,7 @@ function getRottenTomatoesScoreByMovie(movies) {
   }
 
   return movies.map((movie) => {
-    const rottenTomatoesRating = movie.ratings.find(
+    let rottenTomatoesRating = movie.ratings.find(
       (rating) => rating.source === "Rotten Tomatoes"
     );
     return { [movie.title]: rottenTomatoesRating.value };
