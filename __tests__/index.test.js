@@ -11,6 +11,8 @@ const {
 const movies = require("../movies");
 const alternative = require("./fixtures/alternative-movies");
 
+
+// Test passed 100%
 describe("getAllMovieTitles()", () => {
   test("should use the `.map()` method", () => {
     const text = getAllMovieTitles.toString();
@@ -42,6 +44,12 @@ describe("getAllMovieTitles()", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+
+
+
+
+// Test passed 100%
 
 describe("checkIfAnyMovieHasRating()", () => {
   test("should use the `.some()` method", () => {
@@ -75,6 +83,12 @@ describe("checkIfAnyMovieHasRating()", () => {
     expect(checkIfAnyMovieHasRating(alternative)).toEqual(false);
   });
 });
+
+
+
+
+
+//Test passed 100%
 
 describe("findById()", () => {
   test("should use the `.find()` method", () => {
@@ -119,6 +133,9 @@ describe("findById()", () => {
     expect(actual).toEqual(expected);
   });
 });
+ 
+
+//Test Passed 100%
 
 describe("filterByGenre()", () => {
   test("should use the `.filter()` method", () => {
@@ -181,6 +198,11 @@ describe("filterByGenre()", () => {
   });
 });
 
+
+
+
+
+//Test passed 100%
 describe("checkMinMetascores()", () => {
   test("should use the `.every()` method", () => {
     const text = checkMinMetascores.toString();
@@ -203,6 +225,12 @@ describe("checkMinMetascores()", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+
+
+
+
+//Test passed 100%
 
 describe("getAllMoviesReleasedAtOrBeforeYear()", () => {
   test("should use the `.filter()` method", () => {
@@ -248,6 +276,10 @@ describe("getAllMoviesReleasedAtOrBeforeYear()", () => {
     expect(actual).toEqual(expected);
   });
 });
+
+
+
+
 
 describe("getRottenTomatoesScoreByMovie()", () => {
   test("should use the `.map()` method", () => {
