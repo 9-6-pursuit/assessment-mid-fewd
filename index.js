@@ -56,7 +56,7 @@ function getAllMovieTitles(movies) { //This one is Good!
  *  checkIfAnyMovieHasRating(movies, "R");
  *  //> false
  */
-function checkIfAnyMovieHasRating(movies, rating = "G") { //1 test is failing, sadPao
+function checkIfAnyMovieHasRating(movies, rating = "G") { //This one is Good! Finally!!
   if (movies.length === 0){
     throw "No Movies Found"
   }
